@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 
 import com.dbserver.selenium.actions.ExplorarActions;
 import com.dbserver.selenium.paginaBase.BasePage;
-import com.dbserver.selenium.utils.Utils;
 
 public class ExplorarPage extends BasePage<ExplorarActions>{
     
@@ -14,15 +13,15 @@ public class ExplorarPage extends BasePage<ExplorarActions>{
     }
 
     public WebElement obterLinkExplorar(){
-        return this.navegador.findElement(Utils.byDataTestId("nav-explorar"));
+        return this.obterElementoPorDataTestId("nav-explorar");
     }
     public WebElement obterLinkNovoUsuario(){
-        return this.navegador.findElement(Utils.byDataTestId("nav-novo-usuario"));
+        return this.obterElementoPorDataTestId("nav-novo-usuario");
     }
     public WebElement obterLinkMinhasPautas(){
-        return this.navegador.findElement(Utils.byDataTestId("nav-minhas-pautas"));
+        return this.obterElementoPorDataTestId("nav-minhas-pautas");
     }
     public WebElement obterLinkSair(){
-        return this.navegador.findElement(Utils.byDataTestId("nav-logout"));
+        return this.obterElementoPorDataTestId("nav-logout");
     }
 }
