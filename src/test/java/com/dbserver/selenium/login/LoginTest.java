@@ -18,7 +18,7 @@ class LoginTest {
     private LoginActions loginActions;
 
     @BeforeEach
-    public void setup() {
+    public void configurar() {
         this.loginActions = new LoginActions();
     }
 

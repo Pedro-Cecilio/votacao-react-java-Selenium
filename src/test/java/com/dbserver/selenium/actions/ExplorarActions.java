@@ -19,4 +19,9 @@ public class ExplorarActions extends ExplorarPage{
         this.obterLinkMinhasPautas().click();
         return new MinhasPautasActions(this.navegador);
     }
+
+    public ExplorarActions votarPositivoNaUltimaPautaAberta(){
+        this.obterBotaoVotoPositivoUltimaPauta().click();
+        return this;
+    }
 }

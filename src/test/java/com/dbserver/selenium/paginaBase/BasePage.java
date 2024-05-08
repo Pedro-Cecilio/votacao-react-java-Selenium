@@ -34,22 +34,36 @@ public class BasePage<T extends BasePage<T>> {
     public WebElement obterElementoPorDataTestId(String testId) {
         return this.navegador.findElement(Utils.byDataTestId(testId));
     }
-    public WebElement obterUltimoElementoPorDataTestId(String testId) {
-        return this.navegador.findElement(By.xpath("(//*[@data-testid='%s'])[last()]".formatted(testId)));
+
+    public WebElement obterElementoPorDataTestId(String testId, WebElement elemento) {
+        return elemento.findElement(Utils.byDataTestId(testId));
+    }
+
+    public WebElement obterElementoPorDataTestId(String testId, Duration tempoDeEspera) {
+        WebDriverWait wait = new WebDriverWait(navegador, tempoDeEspera);
+
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(Utils.byDataTestId(testId)));
+    }
+
+    public WebElement obterElementoPorId(String id) {
+        return this.navegador.findElement(By.id(id));
     }
 
     public WebElement obterElementoPorTexto(String texto) {
         return this.navegador.findElement(By.xpath("(//*[text()='%s'])[1]".formatted(texto)));
     }
+
     public WebElement obterElementoPorTexto(String texto, Duration tempoDeEspera) {
         WebDriverWait wait = new WebDriverWait(navegador, tempoDeEspera);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[text()='%s'])[1]".formatted(texto))));
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[text()='%s'])[1]".formatted(texto))));
     }
 
     public String obterUrlAtual() {
         return this.navegador.getCurrentUrl();
     }
 
+    @SuppressWarnings("unchecked")
     public T esperarUrlSer(String url, Duration tempoDeEspera) {
         WebDriverWait wait = new WebDriverWait(navegador, tempoDeEspera);
         wait.until(ExpectedConditions.urlToBe(url));

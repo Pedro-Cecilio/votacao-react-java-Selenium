@@ -3,7 +3,6 @@ package com.dbserver.selenium.actions;
 import com.dbserver.selenium.fixture.LoginFixture;
 import com.dbserver.selenium.login.LoginPage;
 import com.dbserver.selenium.models.DadosLogin;
-import com.dbserver.selenium.utils.Utils;
 
 public class LoginActions extends LoginPage {
 
@@ -58,7 +57,7 @@ public class LoginActions extends LoginPage {
     }
 
     private ExplorarActions enviarFormulario() {
-        this.navegador.findElement(Utils.byDataTestId("botao-login")).click();
+        this.obterBotaoEnviar().click();
         return new ExplorarActions(navegador);
     }
 }

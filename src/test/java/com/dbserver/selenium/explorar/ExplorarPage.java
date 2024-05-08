@@ -24,4 +24,12 @@ public class ExplorarPage extends BasePage<ExplorarActions>{
     public WebElement obterLinkSair(){
         return this.obterElementoPorDataTestId("nav-logout");
     }
+
+    public WebElement obterUltimaPautaCriada(){
+        return this.obterElementoPorId("1");
+    }
+
+    public WebElement obterBotaoVotoPositivoUltimaPauta() {
+        return this.obterElementoPorDataTestId("botao-voto-positivo-1");
+    }
 }
