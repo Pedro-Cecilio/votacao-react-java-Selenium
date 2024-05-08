@@ -11,7 +11,12 @@ public class ExplorarActions extends ExplorarPage{
     }
     
     public CadastroUsuarioActions clicarEmNovoUsuario() {
-        this.obterElementoPorDataTestId("nav-novo-usuario").click();
+        this.obterLinkNovoUsuario().click();
         return new CadastroUsuarioActions(this.navegador);
+    }
+
+    public MinhasPautasActions clicarEmMinhasPautas(){
+        this.obterLinkMinhasPautas().click();
+        return new MinhasPautasActions(this.navegador);
     }
 }

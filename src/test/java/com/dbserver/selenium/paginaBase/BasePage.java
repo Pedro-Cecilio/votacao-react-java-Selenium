@@ -18,6 +18,7 @@ public class BasePage<T extends BasePage<T>> {
     public static final String URL_BASE = "http://localhost:5173/";
     public static final String URL_EXPLORAR = URL_BASE + "explorar";
     public static final String URL_CADASTRO = URL_BASE + "cadastro";
+    public static final String URL_MINHAS_PAUTAS = URL_BASE + "minhasPautas";
 
     protected WebDriver navegador;
 
@@ -32,6 +33,9 @@ public class BasePage<T extends BasePage<T>> {
 
     public WebElement obterElementoPorDataTestId(String testId) {
         return this.navegador.findElement(Utils.byDataTestId(testId));
+    }
+    public WebElement obterUltimoElementoPorDataTestId(String testId) {
+        return this.navegador.findElement(By.xpath("(//*[@data-testid='%s'])[last()]".formatted(testId)));
     }
 
     public WebElement obterElementoPorTexto(String texto) {
