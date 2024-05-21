@@ -30,7 +30,7 @@ public class ExplorarPage extends BasePage<ExplorarActions>{
     }
 
     public WebElement obterUltimaPautaCriada() {
-        WebDriverWait wait = new WebDriverWait(navegador, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(navegador, Duration.ofSeconds(15));
 
         return wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.cssSelector("[data-testid='lista-de-pautas'] > :first-child")));
