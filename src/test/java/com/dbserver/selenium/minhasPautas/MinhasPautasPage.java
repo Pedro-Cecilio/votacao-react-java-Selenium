@@ -1,7 +1,11 @@
 package com.dbserver.selenium.minhasPautas;
 
+import java.time.Duration;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.dbserver.selenium.actions.MinhasPautasActions;
 import com.dbserver.selenium.paginaBase.BasePage;
 
@@ -10,7 +14,7 @@ public class MinhasPautasPage extends BasePage<MinhasPautasActions> {
     public MinhasPautasPage(WebDriver webDriver) {
         super(webDriver);
     }
-    
+
     public WebElement obterBotaoAbrirModalNovaPauta() {
         return this.obterElementoPorDataTestId("botao-abrirModalNovaPauta");
     }
@@ -27,10 +31,13 @@ public class MinhasPautasPage extends BasePage<MinhasPautasActions> {
         return this.obterElementoPorDataTestId("botao-criar-pauta");
     }
 
-    public WebElement obterUltimaPautaCriada(){
-        return this.obterElementoPorId("1");
+    public WebElement obterUltimaPautaCriada() {
+        WebDriverWait wait = new WebDriverWait(navegador, Duration.ofSeconds(10));
+
+        return wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.cssSelector("[data-testid='lista-de-pautas'] > :first-child")));
     }
-    
+
     public WebElement obterMenuCardPauta(WebElement elemento) {
         return this.obterElementoPorDataTestId("menu-card-pauta", elemento);
     }

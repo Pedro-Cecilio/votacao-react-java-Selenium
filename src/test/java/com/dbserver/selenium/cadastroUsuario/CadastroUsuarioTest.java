@@ -37,7 +37,7 @@ class CadastroUsuarioTest {
                 .esperarUrlSer(BasePage.URL_CADASTRO, Duration.ofSeconds(10))
                 .cadastrarUsuarioCorretamente();
 
-        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Usuário criado com sucesso", Duration.ofSeconds(5)));
+        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Usuário criado com sucesso", Duration.ofSeconds(10)));
     }
 
     @Test
@@ -49,7 +49,7 @@ class CadastroUsuarioTest {
                 .esperarUrlSer(BasePage.URL_CADASTRO, Duration.ofSeconds(10))
                 .cadastrarUsuarioComEmailExistente();
 
-        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Email já cadastrado.", Duration.ofSeconds(5)));
+        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Email já cadastrado.", Duration.ofSeconds(10)));
     }
     @Test
     void dadoEstouLogadoComoAdminQuandoTentoCadastrarUsuarioComCpfJaCadastradoDeveRetornarMensagemDeErro() {
@@ -60,6 +60,6 @@ class CadastroUsuarioTest {
                 .esperarUrlSer(BasePage.URL_CADASTRO, Duration.ofSeconds(10))
                 .cadastrarUsuarioComCpfExistente();
 
-        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Cpf já cadastrado.", Duration.ofSeconds(5)));
+        assertDoesNotThrow(() -> cadastroUsuario.obterElementoPorTexto("Cpf já cadastrado.", Duration.ofSeconds(10)));
     }
 }

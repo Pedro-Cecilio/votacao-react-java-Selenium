@@ -14,64 +14,69 @@ import com.dbserver.selenium.paginaBase.BasePage;
 
 @SpringBootTest
 class MinhasPautasTest {
-    private LoginActions loginActions;
+        private LoginActions loginActions;
 
-    @BeforeEach
-    public void configurar() {
-        this.loginActions = new LoginActions();
-    }
+        @BeforeEach
+        public void configurar() {
+                this.loginActions = new LoginActions();
+        }
 
-    @AfterEach
-    void limpar() {
-    this.loginActions.fecharNavegador();
-    }
+        @AfterEach
+        void limpar() {
+                this.loginActions.fecharNavegador();
+        }
 
-    @Test
-    void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaCorretamenteDeveCriarNovaPauta() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaCorretamente();
+        @Test
+        void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaCorretamenteDeveCriarNovaPauta() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaCorretamente();
 
-        assertDoesNotThrow(
-                () -> minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10)));
-    }
+                assertDoesNotThrow(
+                                () -> minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!",
+                                                Duration.ofSeconds(10)));
+        }
 
-    @Test
-    void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaAssuntoVazioDeveRetornarMensagemDeErro() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaAssuntoVazio();
+        @Test
+        void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaAssuntoVazioDeveRetornarMensagemDeErro() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaAssuntoVazio();
 
-        assertDoesNotThrow(
-                () -> minhasPautas.obterElementoPorTexto("Assunto deve ser informado.", Duration.ofSeconds(10)));
-    }
+                assertDoesNotThrow(
+                                () -> minhasPautas.obterElementoPorTexto("Assunto deve ser informado.",
+                                                Duration.ofSeconds(10)));
+        }
 
-    @Test
-    void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaCategoriaVaziaDeveRetornarMensagemDeErro() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaCategoriaVazia();
+        @Test
+        void dadoEstouLogadoComoAdminQuandoAcessoMinhasPautasETentoCriarPautaCategoriaVaziaDeveRetornarMensagemDeErro() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaCategoriaVazia();
 
-        assertDoesNotThrow(
-                () -> minhasPautas.obterElementoPorTexto("Categoria deve ser informada.", Duration.ofSeconds(10)));
-    }
+                assertDoesNotThrow(
+                                () -> minhasPautas.obterElementoPorTexto("Categoria deve ser informada.",
+                                                Duration.ofSeconds(10)));
+        }
 
-    @Test
-    void dadoEstouLogadoComoAdminQuandoTentoAbrirSessaoVotacaoEmNovaPautaCorretamenteDeveAbrirSessaoVotacao() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaCorretamente();
-        
-        assertDoesNotThrow(()-> minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10)));
-        assertDoesNotThrow(()-> minhasPautas.abrirSessaoVotacaoCorretamente());
-        assertDoesNotThrow(()-> minhasPautas.obterElementoPorDataTestId("popover-card-votacao-1", Duration.ofSeconds(10)));
-    }
+        @Test
+        void dadoEstouLogadoComoAdminQuandoTentoAbrirSessaoVotacaoEmNovaPautaCorretamenteDeveAbrirSessaoVotacao() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaCorretamente();
+
+                assertDoesNotThrow(() -> minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!",
+                                Duration.ofSeconds(10)));
+                assertDoesNotThrow(() -> minhasPautas.abrirSessaoVotacaoCorretamente());
+                assertDoesNotThrow(() -> minhasPautas.obterElementoPorDataTestId("popover-card-votacao-1",
+                                Duration.ofSeconds(10)));
+        }
 }

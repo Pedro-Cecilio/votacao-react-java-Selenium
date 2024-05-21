@@ -19,83 +19,85 @@ import com.dbserver.selenium.paginaBase.BasePage;
 
 @SpringBootTest
 class ExplorarTest {
-    private LoginActions loginActions;
+        private LoginActions loginActions;
 
-    @BeforeEach
-    void configurar() {
-        this.loginActions = new LoginActions();
-    }
+        @BeforeEach
+        void configurar() {
+                this.loginActions = new LoginActions();
+        }
 
-    @AfterEach
-    void limpar() {
-    this.loginActions.fecharNavegador();
-    }
+        @AfterEach
+        void limpar() {
+                this.loginActions.fecharNavegador();
+        }
 
-    @Test
-    void dadoEstouLogadoComoAdminQuandoAcessoExplorarWhenVerificarComponentesDoHeader() {
-        ExplorarActions explorar = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10));
+        @Test
+        void dadoEstouLogadoComoAdminQuandoAcessoExplorarWhenVerificarComponentesDoHeader() {
+                ExplorarActions explorar = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10));
 
-        assertDoesNotThrow(() -> explorar.obterLinkExplorar());
-        assertDoesNotThrow(() -> explorar.obterLinkNovoUsuario());
-        assertDoesNotThrow(() -> explorar.obterLinkMinhasPautas());
-        assertDoesNotThrow(() -> explorar.obterLinkSair());
-    }
+                assertDoesNotThrow(() -> explorar.obterLinkExplorar());
+                assertDoesNotThrow(() -> explorar.obterLinkNovoUsuario());
+                assertDoesNotThrow(() -> explorar.obterLinkMinhasPautas());
+                assertDoesNotThrow(() -> explorar.obterLinkSair());
+        }
 
-    @Test
-    void dadoEstouLogadoComoUsuarioQuandoAcessoExplorarWhenVerificarComponentesDoHeader() {
-        ExplorarActions explorar = this.loginActions
-                .logarComoUsuario()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10));
+        @Test
+        void dadoEstouLogadoComoUsuarioQuandoAcessoExplorarWhenVerificarComponentesDoHeader() {
+                ExplorarActions explorar = this.loginActions
+                                .logarComoUsuario()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10));
 
-        assertDoesNotThrow(() -> explorar.obterLinkExplorar());
-        assertThrows(NoSuchElementException.class, () -> explorar.obterLinkNovoUsuario());
-        assertThrows(NoSuchElementException.class, () -> explorar.obterLinkMinhasPautas());
-        assertDoesNotThrow(() -> explorar.obterLinkSair());
-    }
+                assertDoesNotThrow(() -> explorar.obterLinkExplorar());
+                assertThrows(NoSuchElementException.class, () -> explorar.obterLinkNovoUsuario());
+                assertThrows(NoSuchElementException.class, () -> explorar.obterLinkMinhasPautas());
+                assertDoesNotThrow(() -> explorar.obterLinkSair());
+        }
 
-    @Test
-    void dadoEstouLogadoComoUsuarioQuandoTentoVotarEmUmaPautaWhenRetornarMensagemDeSucesso() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaCorretamente();
+        @Test
+        void dadoEstouLogadoComoUsuarioQuandoTentoVotarEmUmaPautaWhenRetornarMensagemDeSucesso() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaCorretamente();
 
-        minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10));
-        minhasPautas
-                .abrirSessaoVotacaoCorretamente();
+                minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10));
+                minhasPautas
+                                .abrirSessaoVotacaoCorretamente();
 
-        LoginActions novaPagina = new LoginActions();
-        novaPagina
-                .logarComoUsuario()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .votarPositivoNaUltimaPautaAberta();
-        assertDoesNotThrow(() -> novaPagina.obterElementoPorTexto("Voto inserido com sucesso", Duration.ofSeconds(10)));
-        novaPagina.fecharNavegador();
-    }
+                LoginActions novaPagina = new LoginActions();
+                novaPagina
+                                .logarComoUsuario()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .votarPositivoNaUltimaPautaAberta();
+                assertDoesNotThrow(() -> novaPagina.obterElementoPorTexto("Voto inserido com sucesso",
+                                Duration.ofSeconds(10)));
+                novaPagina.fecharNavegador();
+        }
 
-    @Test
-    void dadoEstouLogadoComoUsuarioQuandoTentoVotarDuasVezesEmUmaPautaWhenRetornarMensagemDeErro() {
-        MinhasPautasActions minhasPautas = this.loginActions
-                .logarComoAdmin()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .clicarEmMinhasPautas()
-                .criarNovaPautaCorretamente();
+        @Test
+        void dadoEstouLogadoComoUsuarioQuandoTentoVotarDuasVezesEmUmaPautaWhenRetornarMensagemDeErro() {
+                MinhasPautasActions minhasPautas = this.loginActions
+                                .logarComoAdmin()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .clicarEmMinhasPautas()
+                                .criarNovaPautaCorretamente();
 
-        minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10));
-        minhasPautas
-                .abrirSessaoVotacaoCorretamente();
+                minhasPautas.obterElementoPorTexto("Pauta criada com sucesso!", Duration.ofSeconds(10));
+                minhasPautas
+                                .abrirSessaoVotacaoCorretamente();
 
-        LoginActions novaPagina = new LoginActions();
-        novaPagina
-                .logarComoUsuario()
-                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
-                .votarPositivoNaUltimaPautaAberta()
-                .votarPositivoNaUltimaPautaAberta();
-        assertDoesNotThrow(
-                () -> novaPagina.obterElementoPorTexto("Não é possível votar duas vezes.", Duration.ofSeconds(10)));
-        novaPagina.fecharNavegador();
-    }
+                LoginActions novaPagina = new LoginActions();
+                novaPagina
+                                .logarComoUsuario()
+                                .esperarUrlSer(BasePage.URL_EXPLORAR, Duration.ofSeconds(10))
+                                .votarPositivoNaUltimaPautaAberta()
+                                .votarPositivoNaUltimaPautaAberta();
+                assertDoesNotThrow(
+                                () -> novaPagina.obterElementoPorTexto("Não é possível votar duas vezes.",
+                                                Duration.ofSeconds(10)));
+                novaPagina.fecharNavegador();
+        }
 }
